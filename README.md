@@ -1,73 +1,55 @@
-# React + TypeScript + Vite
+﻿# Scanner de Documentos
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Aplicacao web simples para cadastro e acompanhamento de documentos digitalizados. O projeto foi desenvolvido para apoiar um trabalho academico de Engenharia de Software III, com foco em plano e execucao de testes de uma aplicacao.
 
-Currently, two official plugins are available:
+## Objetivo
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+Permitir que usuarios cadastrem documentos, acompanhem o status de digitalizacao, pesquisem registros, filtrem por status e removam itens. A aplicacao tambem possui validacoes basicas para possibilitar cenarios de testes funcionais, entradas invalidas, evidencias com prints e verificacao de responsividade.
 
-## React Compiler
+## Tecnologias usadas
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- React
+- TypeScript
+- Vite
+- CSS
+- localStorage
 
-## Expanding the ESLint configuration
+## Como rodar o projeto
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+Instale as dependencias:
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
-
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```bash
+npm install
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+Inicie o ambiente de desenvolvimento:
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```bash
+npm run dev
 ```
+
+Gere a versao de producao:
+
+```bash
+npm run build
+```
+
+Visualize a build localmente:
+
+```bash
+npm run preview
+```
+
+## Principais funcionalidades
+
+- Cadastro de documento com nome, tipo, data, status e arquivo.
+- Validacao de campos obrigatorios.
+- Validacao de upload para arquivos PDF, PNG, JPG ou JPEG.
+- Listagem de documentos cadastrados.
+- Pesquisa por nome do documento.
+- Filtro por status: todos, digitalizado ou pendente.
+- Exclusao de documentos.
+- Cards de resumo com total, digitalizados e pendentes.
+- Dados iniciais de exemplo.
+- Persistencia no localStorage para manter os registros apos atualizar a pagina.
+- Layout responsivo para telas menores.
