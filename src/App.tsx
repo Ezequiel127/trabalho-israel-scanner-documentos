@@ -98,6 +98,7 @@ function App() {
   const [documents, setDocuments] = useState<DocumentRecord[]>(loadDocuments)
   const [form, setForm] = useState<DocumentForm>(emptyForm)
   const [errors, setErrors] = useState<FormErrors>({})
+  const [fileInputKey, setFileInputKey] = useState(0)
   const [searchTerm, setSearchTerm] = useState('')
   const [statusFilter, setStatusFilter] = useState<'Todos' | DocumentStatus>(
     'Todos',
@@ -133,6 +134,12 @@ function App() {
   function saveDocuments(nextDocuments: DocumentRecord[]) {
     setDocuments(nextDocuments)
     localStorage.setItem(STORAGE_KEY, JSON.stringify(nextDocuments))
+  }
+
+  function resetForm() {
+    setForm(emptyForm)
+    setErrors({})
+    setFileInputKey((currentKey) => currentKey + 1)
   }
 
   function validateForm() {
@@ -205,9 +212,7 @@ function App() {
     }
 
     saveDocuments([newDocument, ...documents])
-    setForm(emptyForm)
-    setErrors({})
-    event.currentTarget.reset()
+    resetForm()
   }
 
   function handleDelete(documentId: string) {
@@ -246,8 +251,8 @@ function App() {
       <section className="content-grid">
         <form className="panel document-form" onSubmit={handleSubmit} noValidate>
           <div className="panel-heading">
-            <h2>Cadastrar documento</h2>
-            <p>Use dados validos para simular cenarios de teste funcionais.</p>
+            <h2>Cadastro de documento</h2>
+            <p>Use informacoes validas para simular cenarios de teste funcionais.</p>
           </div>
 
           <label>
@@ -296,6 +301,7 @@ function App() {
           <label>
             Arquivo
             <input
+              key={fileInputKey}
               type="file"
               accept=".pdf,.png,.jpg,.jpeg,application/pdf,image/png,image/jpeg"
               onChange={handleFileChange}
@@ -369,7 +375,7 @@ function App() {
                         {document.status}
                       </span>
                     </td>
-                    <td data-label="Arquivo">
+                    <td className="file-cell" data-label="Arquivo">
                       <span className="file-name">{document.fileName}</span>
                     </td>
                     <td data-label="Acoes">
